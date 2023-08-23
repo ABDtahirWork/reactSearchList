@@ -3,9 +3,6 @@ import classes from './App.css';
 import Container from '../components/Container/Container';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   state = {
     persons: [
