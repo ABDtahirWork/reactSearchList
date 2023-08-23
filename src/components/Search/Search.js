@@ -10,7 +10,7 @@ const Search = (props) => {
         value={props.name}
         onChange={props.handleChangeName}
       />
-      <button onClick={props.handleSearch}>Search</button>
+      <button onClick={() => props.handleSearch(props.name)}>Search</button>
     </div>
   )
 }
