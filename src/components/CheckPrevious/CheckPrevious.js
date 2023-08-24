@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classes from './CheckPrevious.css'
 
 const CheckPrevious = (props) => {
-  const [checkedIndex, setCheckedIndex] = useState(null)
+  const [checkedIndexes, setCheckedIndexes] = useState([])
+
+  useEffect(() => {
+    const selectedItems = checkedIndexes.map((index) => props.items[index])
+    props.handleSearch(selectedItems)
+  }, [checkedIndexes])
 
   const handleCheckboxChange = (index) => {
-    setCheckedIndex(index)
-    props.handleSearch(props.items[index])
+    if (checkedIndexes.includes(index)) {
+      // Remove the index if it's already checked
+      setCheckedIndexes((prevIndexes) => prevIndexes.filter((i) => i !== index))
+    } else {
+      // Add the index if it's not checked
+      setCheckedIndexes((prevIndexes) => [...prevIndexes, index])
+    }
   }
 
   return (
@@ -15,7 +25,7 @@ const CheckPrevious = (props) => {
         <div key={index}>
           <input
             type='checkbox'
-            checked={checkedIndex === index}
+            checked={checkedIndexes.includes(index)}
             onChange={() => handleCheckboxChange(index)}
           />
           <label>{item}</label>
