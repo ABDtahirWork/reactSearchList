@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import classes from './Container.css'
+import classes from './Container.module.css'
 import Search from '../Search/Search'
-import Table from '../Table/Table'
+import ListNames from '../ListNames/ListNames'
 import CheckPrevious from '../CheckPrevious/CheckPrevious'
 
-const SearchApp = (props) => {
+const SearchPage = (props) => {
   const [persons, setPersons] = useState(props.persons)
   const [name, setName] = useState('')
   const [pastSearches, setPastSearches] = useState([])
@@ -13,7 +13,7 @@ const SearchApp = (props) => {
     setName(event.target.value)
   }
 
-  const getPersons = (name) => {
+  const getItems = (name) => {
     return props.persons.filter((person) => {
       if (person.name.toLowerCase().startsWith(name)) {
         return person
@@ -24,39 +24,39 @@ const SearchApp = (props) => {
 
   const handleCheckboxSearch = (selectedItems) => {
     if (selectedItems.length > 0) {
-      let tempPersons = selectedItems.map((selectedSearch) => {
-        return getPersons(selectedSearch)
-      })
-      setPersons(tempPersons.flat())
+      const tempPersons = selectedItems.reduce((acc, selectedSearch) => {
+        const selectedItemsData = getItems(selectedSearch)
+        return [...acc, ...selectedItemsData]
+      }, [])
+      setPersons(tempPersons)
     } else {
       setPersons(props.persons)
     }
   }
 
   const handleSearchName = (name) => {
-    const search = name.toLowerCase().trimStart().trimEnd()
-    //filters the person names list
-    const updatedPersons = getPersons(search)
-    setPersons(updatedPersons)
-    //updates pastSearches list
+    const search = name.toLowerCase().trim()
+    setPersons(getItems(search))
     if (!pastSearches.includes(search) && search !== '') {
-      const updatedSearches = [...pastSearches, search]
-      setPastSearches(updatedSearches)
+      setPastSearches([...pastSearches, search])
     }
   }
 
   return (
-    <div className={classes.Container}>
+    <div className={classes.container}>
       <h1>Persons Name</h1>
       <Search
         name={name}
         handleChangeName={handleChangeName}
         handleSearch={handleSearchName}
       />
-      <CheckPrevious items={pastSearches} handleSearch={handleCheckboxSearch} />
-      <Table persons={persons} />
+      <CheckPrevious
+        previousSearches={pastSearches}
+        handleSearch={handleCheckboxSearch}
+      />
+      <ListNames persons={persons} />
     </div>
   )
 }
 
-export default SearchApp
+export default SearchPage

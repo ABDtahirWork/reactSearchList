@@ -1,16 +1,16 @@
 import React from 'react'
-import classes from './Search.css'
+import classes from './Search.module.css'
 
-const Search = (props) => {
+const Search = ({ name, handleChangeName, handleSearch }) => {
   return (
     <div className={classes.searchBox}>
       <input
-        className={classes.Input}
+        className={classes.input}
         type='text'
-        value={props.name}
-        onChange={props.handleChangeName}
+        value={name}
+        onChange={handleChangeName}
       />
-      <button onClick={() => props.handleSearch(props.name)}>Search</button>
+      <button onClick={() => handleSearch(name)}>Search</button>
     </div>
   )
 }
