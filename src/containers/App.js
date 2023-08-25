@@ -1,28 +1,23 @@
-import React, { Component} from 'react';
-import classes from './App.css';
+import React, { useState } from 'react'
+import classes from './App.module.css'
+import SearchPage from '../components/SearchPage/SearchPage'
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-  }
+const App = () => {
+  const [persons] = useState([
+    { name: 'Manu' },
+    { name: 'Max' },
+    { name: 'Stephanie' },
+    { name: 'Sam' },
+    { name: 'alex stephanie' },
+    { name: 'Bob' },
+    { name: 'Bedrick' },
+  ])
 
-  state = {
-    persons: [
-      { name: 'Manu', age: 29 },
-      { name: 'Max', age: 25 },
-      { name: 'Stephanie', age: 30 },
-    ],
-    showPersons: false,
-  };
-
-  render() {
-
-    return (
-      <div className={classes.App}>
-
-      </div>
-    );
-  }
+  return (
+    <div className={classes.app}>
+      <SearchPage orignalPersons={persons} />
+    </div>
+  )
 }
 
-export default App;
+export default App

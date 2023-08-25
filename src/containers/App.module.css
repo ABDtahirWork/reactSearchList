@@ -1,25 +1,26 @@
-.App {
-  text-align: center;
+.app {
+  margin: 0;
 }
 
-.App button {
+.app button {
   background-color: green;
   color: white;
   border: 1px solid blue;
   padding: 8px;
   cursor: pointer;
+  width: 30%;
 }
 
-.App button:hover {
+.app button:hover {
   background-color: lightgreen;
   color: black;
 }
 
-.App button.Red {
+.app button.Red {
   background-color: red;
 }
 
-.App button.Red:hover {
+.app button.Red:hover {
   background-color: salmon;
   color: black;
 }
