@@ -4,8 +4,8 @@ import Search from '../Search/Search'
 import ListNames from '../ListNames/ListNames'
 import CheckPrevious from '../CheckPrevious/CheckPrevious'
 
-const SearchPage = (props) => {
-  const [persons, setPersons] = useState(props.persons)
+const SearchPage = ({ orignalPersons }) => {
+  const [persons, setPersons] = useState(orignalPersons)
   const [name, setName] = useState('')
   const [pastSearches, setPastSearches] = useState([])
 
@@ -14,7 +14,7 @@ const SearchPage = (props) => {
   }
 
   const getItems = (name) => {
-    return props.persons.filter((person) => {
+    return orignalPersons.filter((person) => {
       if (person.name.toLowerCase().startsWith(name)) {
         return person
       }
@@ -30,7 +30,7 @@ const SearchPage = (props) => {
       }, [])
       setPersons(tempPersons)
     } else {
-      setPersons(props.persons)
+      setPersons(orignalPersons)
     }
   }
 

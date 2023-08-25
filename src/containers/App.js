@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import classes from './App.css'
+import classes from './App.module.css'
 import SearchPage from '../components/SearchPage/SearchPage'
 
 const App = () => {
@@ -14,8 +14,8 @@ const App = () => {
   ])
 
   return (
-    <div className={classes.App}>
-      <SearchPage persons={persons} />
+    <div className={classes.app}>
+      <SearchPage orignalPersons={persons} />
     </div>
   )
 }
